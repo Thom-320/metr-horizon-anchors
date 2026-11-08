@@ -19,9 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----------------------------------------------------------------------------
-Scope: this licence covers only the original code and text in this repository
-(scripts/, src/, tests/, run.sh, setup.sh and the documentation). It does NOT
-cover METR's code or data, which this repository does not license and which
-setup.sh fetches from METR's public sources. See NOTICE.

@@ -1,5 +1,7 @@
 metr-horizon-anchors
 Copyright (c) 2026 Thomas Chisica. Original code and text: MIT (see LICENSE).
+LICENSE covers only the original code and text in this repository (scripts/,
+src/, tests/, run.sh, setup.sh and the documentation).
 
 This repository analyses third-party material it does not own. None of it is
 covered by LICENSE.
