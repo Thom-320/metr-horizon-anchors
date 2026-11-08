@@ -1,0 +1,66 @@
+[Parallel(n_jobs=10)]: Using backend LokyBackend with 10 concurrent workers.
+[Parallel(n_jobs=10)]: Done  30 tasks      | elapsed:    9.4s
+[Parallel(n_jobs=10)]: Done 100 out of 100 | elapsed:   22.1s finished
+                            agent  p50_published  p50_reproduced  p50_rel_diff  p50_ci_published p50_ci_reproduced  p80_rel_diff
+            GPT-4 Turbo (Inspect)       3.732787        3.732787           0.0      [1.98, 6.74]      [1.94, 6.74]           0.0
+          Claude 3 Opus (Inspect)       3.952262        3.952262           0.0      [1.71, 8.76]      [1.68, 8.64]           0.0
+                       GPT-4 0314       3.987428        3.987428           0.0      [1.93, 8.00]      [1.96, 7.91]           0.0
+             GPT-4 1106 (Inspect)       4.044959        4.044959           0.0      [1.87, 8.44]      [1.95, 8.19]           0.0
+                 GPT-4o (Inspect)       6.991195        6.991195           0.0     [4.00, 12.91]     [3.85, 12.41]           0.0
+Claude 3.5 Sonnet (Old) (Inspect)      11.395377       11.395377           0.0     [5.49, 22.38]     [5.44, 22.52]           0.0
+                       o1-preview      20.326586       20.326586           0.0    [11.72, 33.38]    [11.61, 33.15]           0.0
+Claude 3.5 Sonnet (New) (Inspect)      20.522872       20.522872           0.0    [10.14, 40.82]     [9.87, 40.41]           0.0
+                     o1 (Inspect)      38.831588       38.831588           0.0    [21.16, 64.95]    [21.69, 67.22]           0.0
+      Claude 3.7 Sonnet (Inspect)      60.388937       60.388937           0.0   [33.01, 104.23]   [33.39, 107.30]           0.0
+          Claude 4 Opus (Inspect)     100.366123      100.366123           0.0   [59.99, 163.45]   [60.37, 163.28]           0.0
+        Claude 4.1 Opus (Inspect)     100.472004      100.472004           0.0   [59.27, 159.45]   [60.11, 158.02]           0.0
+                     o3 (Inspect)     119.732634      119.732634           0.0   [74.62, 190.94]   [72.98, 191.58]           0.0
+                  GPT-5 (Inspect)     203.012577      203.012577           0.0  [112.64, 405.55]  [114.21, 406.74]           0.0
+      GPT-5.1-Codex-Max (Inspect)     223.714694      223.714694           0.0  [134.31, 396.21]  [135.21, 395.14]           0.0
+                     Gemini 3 Pro     224.325884      224.325884           0.0  [139.57, 379.24]  [136.87, 387.48]           0.0
+        Claude Opus 4.5 (Inspect)     292.994594      292.994594           0.0  [161.72, 623.70]  [160.54, 638.62]           0.0
+                    GPT-5.3-Codex     349.530732      349.530732           0.0  [194.91, 816.35]  [192.05, 858.33]           0.0
+                          GPT-5.2     352.249302      352.249302           0.0  [198.07, 815.18]  [191.32, 862.34]           0.0
+        Claude Opus 4.6 (Inspect)     718.806830      718.806830           0.0 [316.69, 3633.79] [319.32, 3949.75]           0.0
+{
+  "reference_models": [
+    "GPT-4 0314",
+    "Claude 3.7 Sonnet (Inspect)",
+    "o3 (Inspect)",
+    "Claude Opus 4.6 (Inspect)"
+  ],
+  "max_abs_rel_diff_p50_reference": 0.0,
+  "max_abs_rel_diff_p50_all_models": 0.0,
+  "n_models_compared": 20,
+  "K1_pass": true,
+  "doubling_from_2023": {
+    "published_point_days": 128.744,
+    "published_ci": [
+      104.428,
+      158.012
+    ],
+    "reproduced_point_days": 128.744,
+    "reproduced_ci": [
+      105.26,
+      157.336
+    ],
+    "rel_diff_point": -1.5328809109815822e-06,
+    "sota_agents": [
+      "GPT-4 0314",
+      "GPT-4 1106 (Inspect)",
+      "GPT-4o (Inspect)",
+      "Claude 3.5 Sonnet (Old) (Inspect)",
+      "o1-preview",
+      "Claude 3.5 Sonnet (New) (Inspect)",
+      "o1 (Inspect)",
+      "Claude 3.7 Sonnet (Inspect)",
+      "o3 (Inspect)",
+      "GPT-5 (Inspect)",
+      "Gemini 3 Pro",
+      "Claude Opus 4.5 (Inspect)",
+      "GPT-5.2",
+      "Claude Opus 4.6 (Inspect)"
+    ],
+    "n_bootstrap_valid": 1000
+  }
+}

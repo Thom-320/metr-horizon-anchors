@@ -1,0 +1,170 @@
+# PILOT MEMO: validity of METR time-horizon measurements (steps 1–2)
+
+Written 2026-10-08 with an AI coding assistant (Claude, through Claude Code) in a session directed by Thomas Chisica.
+Spec: an internal scoping document (not included): steps 1–2, with kill criteria K1–K4 written before the analysis.
+Labels: [V] verified here by a command or a primary source; [P] partial; [U] unknown; [I] my inference.
+
+---
+
+## Resumen (español)
+
+1. **K1 (réplica): APROBADO** [V]. Con el código de METR (commit `52cb829`, 5 mar 2026) y su `runs.jsonl` de TH1.1, reproduzco el p50 publicado en metr.org para los 20 modelos del archivo público de corridas con diferencia relativa 0 (6 decimales). Esto incluye los 4 modelos de referencia: Claude Opus 4.6 = 718,81 min (11,98 h), o3 = 119,73, Claude 3.7 Sonnet = 60,39 y GPT-4 0314 = 3,99. El p80 también coincide exactamente. La duplicación desde 2023 es 128,744 días, idéntica a la publicada. Su IC bootstrap es [105,3; 157,3] frente a [104,4; 158,0] publicado.
+2. **Anclas** [V]. De las 228 tareas, 162 tienen línea base humana medida y 66 son estimaciones. Entre las 31 tareas de 8 h o más, 5 son medidas y 26 estimadas. La tarea medida más larga dura 18,5 h. Las tareas estimadas llevan el 36,8 % del peso de METR, y las estimadas de 8 h o más, el 16,1 %.
+3. **Solo tareas medidas**: el p50 sube en todos los modelos. Sube 1,1–1,5× en los antiguos y 1,7–4× en la frontera: Opus 4.6 pasa de 12,0 h a 48,6 h, con IC del cociente [0,59; >10⁵]. **Con anclas medidas el p50 de frontera no está identificado**, porque cae más allá de la tarea medida más larga. La duplicación baja de 128,7 a 114,9 días (−11 %), pero el IC pareado del cociente, [0,50; 1,16], incluye 1.
+4. **Sensibilidad k** (tiempos estimados × k, k ∈ {0,5; 0,75; 1,5; 2}): el p50 de Opus 4.6 cambia entre −26 % y +55 %, y la duplicación como máximo un −6,2 %. Si solo se escalan las estimadas de 8 h o más: −21 % a +39 % en p50 y como máximo 5,6 % en duplicación.
+5. **Lectura K2** (solo la mitad de anclas; la mitad π está diferida): el criterio de p50 (≥15 %) **se cumple** y el de duplicación (≥10 %) **no se cumple**. K2 no mata el estudio, pero sí la afirmación sobre la duplicación. El error de ancla mueve el **nivel**: la fecha en que la frontera cruza un umbral se desplaza unos −1,9 a +2,7 meses. La **tendencia** apenas se mueve. METR ya lo anticipó en su nota del 22 ene 2026, donde dice que el error correlacionado con la longitud "wouldn't affect the doubling time much".
+6. **K4: el modelo debe corregirse** [V/P]. El código público no tiene ninguna regla de descalificación. `score_binarized` viene precalculado y es función determinista de `score_cont` (0 conflictos). METR dice que su práctica estándar es dar puntuación cero a las trampas. Por tanto, las trampas detectadas, si están en este archivo, son indistinguibles de fallos honestos. El "16 %" (de "shared models", en tareas de 8 h o más) no se puede volver a restar como si no estuviera aplicado. El paso 3 debe modelar solo las trampas **no detectadas** que quedan entre los éxitos. Las variantes "trampas descartadas" o "trampas como éxitos" no se pueden reconstruir con datos públicos.
+7. **K3** [P]: no encontré un split publicado por fuente de ancla. Sí hay solapamiento: METR (22 ene 2026) ya dice que el ruido de anclas apenas afecta la duplicación, y Barry (20 mar 2026) da una corrección de nivel de 0–60 %.
+8. **Para la nota**: seguir, pero con otro encuadre. Pasa de "sesgo en la duplicación" a "**qué identifican las anclas medidas**: nivel y fechas de cruce de umbrales, no pendiente". Un diagnóstico descriptivo indica que las tareas estimadas se comportan como si fueran unas 3 veces más largas que su etiqueta (mediana de k* sobre 20 modelos; solo 3 IC excluyen 1). Eso sugiere que el rango k ∈ [0,5; 2] puede quedarse corto por arriba. Con k = 3–4, la duplicación cambia entre −10 % y −13 %.
+9. **Límites**: k uniforme es un modelo de error tosco; no incluye ruido por tarea (eso es EIV/SIMEX, paso 2b). El split solo-medidas mezcla fuente de ancla y tipo de tarea. Los datos públicos terminan en Opus 4.6 / GPT-5.3-Codex (feb 2026) y no incluyen Mythos Preview ni GPT-5.6 Sol. No hubo pre-registro OSF antes del paso 2, así que este piloto es exploratorio.
+
+---
+
+## 1. Setup and provenance [V]
+
+| Item | Value |
+|---|---|
+| METR code and data | `github.com/METR/eval-analysis-public`, commit `52cb829c7a2efb2d659285c4b1768d191d97f8d2` (2026-03-05, "Sync public pipeline (#39)"), the latest on `main` when cloned today |
+| TH1.1 runs | `reports/time-horizon-1-1/data/raw/runs.jsonl`: 24,008 runs, 228 tasks, 20 models plus `human`. sha256 `609f904f…b55cd`, identical to the file used for the scoping probes |
+| Published values | `https://metr.org/assets/benchmark_results_1_1.yaml`, linked from `https://metr.org/time-horizons/` (page "last updated May 8, 2026"). Fetched 2026-10-08, sha256 `aae31902…2ad9` |
+| Environment | Python 3.12.13 (uv venv), scikit-learn 1.8.0, numpy 2.4.1, pandas 2.3.3, dvc 3.66.1. Pins exported from METR's `uv.lock` into `requirements.lock.txt` |
+| Patch | `cairosvg` is stubbed. METR imports it only to draw a logo (`utils/plots.py:396`). libcairo is not on the default macOS dyld path. No numeric code is touched |
+| Cross-check | I also ran METR's own DVC stages (`wrangle_bootstrap_logistic@headline`, `wrangle_logistic_regression@headline`). They gave the same `headline.csv` numbers as `01_replicate.py` |
+| Reproduce | `./run.sh` takes about 4 min. It runs setup, then 4 scripts, and writes `results/`, `figures/` and the logs |
+
+Exclusions: the public runs file has 20 of the 26 models in the published YAML. It is missing **Claude Mythos Preview**, Gemini 3.1 Pro, GPT-5.4 and three old models that METR stitches in from TH1.0. GPT-5.6 Sol, METR's June 2026 post, is not in either file. In this pilot, "frontier" therefore means **Claude Opus 4.6**, the highest-p50 model in the public runs.
+
+## 2. Step 1: replication gate (K1) — PASS [V]
+
+Published values are from `benchmark_results_1_1.yaml`. Reproduced values come from METR's `run_logistic_regressions` and `compute_bootstrap_regressions` with the headline parameters: `invsqrt_task_weight`, regularization 1e-5, 1,000 hierarchical bootstraps over family → task → run, seeds 42+i.
+
+| Model (reference) | Published p50 (min) [95 % CI] | Reproduced p50 [95 % CI] | Rel. diff | p80 published / reproduced |
+|---|---|---|---|---|
+| Claude Opus 4.6 (frontier, Feb 2026) | 718.81 [316.69, 3633.79] | 718.81 [319.32, 3949.75] | 0.0 | 69.87 / 69.87 |
+| o3 (Apr 2025) | 119.73 [74.62, 190.94] | 119.73 [72.98, 191.58] | 0.0 | 29.98 / 29.98 |
+| Claude 3.7 Sonnet (Feb 2025) | 60.39 [33.01, 104.23] | 60.39 [33.39, 107.30] | 0.0 | 12.09 / 12.09 |
+| GPT-4 0314 (Mar 2023) | 3.99 [1.93, 8.00] | 3.99 [1.96, 7.91] | 0.0 | 0.89 / 0.89 |
+
+- All 20 models: max |relative difference| in p50 = 0 to 6 decimals (`results/replication_gate.csv`, `figures/fig1_replication_gate.png`).
+- Doubling time from 2023 (METR's `compute_bootstrap_confidence_region` over the same 14 SOTA models): point estimate 128.744 days, the same as published. Reproduced CI is [105.3, 157.3] against published [104.4, 158.0].
+- Why the CIs differ slightly [I]: the bootstrap draws one resample shared across all models, and METR's published run contained models absent from the public file, so its random-number stream differs. The YAML note "excludes points with central estimate p50 > 16 hrs" is not in the public code at `52cb829`. It does not bind on the public data, since no public model's central p50 exceeds 16 h.
+
+## 3. Step 2a: how each task's human time was obtained [V]
+
+The source is the `human_source` field (`baseline` = measured human baselines; `estimate` = researcher estimate). The table (regenerated by `./run.sh`, not redistributed; see `NOTICE`) is `results/task_anchor_classification.csv` / `anchor_counts_by_length.csv`.
+
+| Length | <1m | 1–4m | 4–16m | 16–60m | 1–4h | 4–8h | 8–16h | ≥16h | Total |
+|---|---|---|---|---|---|---|---|---|---|
+| baseline | 67 | 11 | 29 | 28 | 12 | 10 | 4 | 1 | 162 |
+| estimate | 0 | 4 | 10 | 6 | 6 | 14 | 22 | 4 | 66 |
+
+- At 8 h or more: **5 baselined, 26 estimated**.
+- The two longest baselined tasks are `acdc_bug/fix_checkpointing` (877 min) and `iclr_authors/notable-top-25` (1,112 min ≈ 18.5 h).
+- Estimates are round numbers: 12 tasks at exactly 480 min, 5 at 600 min.
+- Under METR's weights, estimate-anchored tasks carry 36.8 % of each model's weight. Estimate-anchored tasks of 8 h or more carry 16.1 % (`weight_shares.csv`).
+
+## 4. Step 2b: anchor split — all tasks vs baselined-only [V numbers; I interpretation]
+
+Variant (b) drops all 66 estimate tasks and recomputes METR's weights on the remaining tasks with `add_task_weight_columns`, as METR does when it excludes tasks. Intervals come from 1,000 **paired** hierarchical task bootstraps. Each resample is METR's family → task → run resample with seed 42+i, and every variant is fitted on the same resample, so the ratio CIs are paired. The variant (a) CIs equal METR's own.
+
+| Model | p50 all (h) | p50 baselined-only (h) | ratio [95 % CI] | p80 ratio [95 % CI] |
+|---|---|---|---|---|
+| GPT-4 0314 | 0.07 | 0.09 | 1.35 [0.95, 2.02] | 1.39 [0.85, 2.82] |
+| Claude 3.7 Sonnet | 1.01 | 1.24 | 1.23 [0.76, 2.53] | 1.07 [0.67, 1.71] |
+| o3 | 2.00 | 2.71 | 1.36 [0.75, 2.72] | 1.39 [0.93, 2.35] |
+| GPT-5 | 3.38 | 5.84 | 1.73 [0.72, 9.37] | 1.75 [1.05, 4.69] |
+| Claude Opus 4.5 | 4.88 | 11.74 | 2.40 [0.84, 64.4] | 2.19 [1.09, 12.1] |
+| GPT-5.2 | 5.87 | 12.27 | 2.09 [0.64, 50.7] | 1.78 [0.89, 9.16] |
+| **Claude Opus 4.6** | **11.98** | **48.58** | **4.06 [0.59, >10⁵]** | 3.14 [1.07, 958] |
+
+Doubling time from 2023 (`doubling_by_variant.csv`, `figures/fig2_anchor_split.png`):
+
+| SOTA rule | all tasks | baselined-only | paired ratio [95 % CI] |
+|---|---|---|---|
+| fixed set (the 14 SOTA models under "all") | 128.7 d [105.3, 157.3] | 114.9 d [59.1, 155.9] | 0.89 [0.50, 1.16] |
+| METR's rule re-applied to the variant | 128.7 | 113.6 d [59.5, 154.7] (13 SOTA) | 0.88 [0.50, 1.15] |
+| fixed set, excluding central p50 > 16 h (as in the YAML note) | 128.7 | 124.9 d [82.2, 164.9] | 0.97 [0.67, 1.24] |
+
+Reading [I]:
+- Removing estimate-anchored tasks **raises** p50 for every model. A per-model diagnostic agrees (`implied_k_estimate_vs_baseline.csv`): success ~ log2(minutes) + estimate indicator, using METR's weights. At equal labelled length, estimate-anchored tasks are harder for models than baselined ones. They behave as if their label were multiplied by k*, with median k* = 3.1 across the 20 models; all 20 point estimates are above 1, but only 3 per-model CIs exclude 1, and the models share tasks, so these are not independent results. This does not say whether the estimates are too short or whether estimate-anchored tasks are a different kind of task (messier, newer).
+- **Identification.** With baselined-only anchors, Opus 4.6's p50 (48.6 h) lies far beyond the longest baselined task (18.5 h), and its upper CI is unbounded. METR's published frontier p50 is therefore pinned by estimate-anchored tasks. Without them the data cannot locate it.
+- The doubling-time point estimate falls by about 11 %, but the paired interval includes no change. It also confounds anchor source with task mix.
+
+## 5. Step 2c: k sensitivity on estimated times [V]
+
+Estimated human minutes are multiplied by k; weights are unchanged. "estall" scales all 66 estimate tasks; "estlong" scales only the 26 estimate tasks of 8 h or more, as in the scoping probe. k = 3 and 4 are outside the pre-set K2 range and are shown only for context (`k2_readout.csv`, `figures/fig3_k_sensitivity.png`).
+
+| Variant | Opus 4.6 p50 change [95 % CI] | Doubling change, fixed SOTA [95 % CI] | Doubling change, METR SOTA rule |
+|---|---|---|---|
+| estall k=0.5 | −26.1 % [−39.7, +3.2] | +4.0 % [−1.4, +9.8] | +1.5 % |
+| estall k=0.75 | −13.6 % [−20.2, −2.8] | +2.0 % [−0.0, +4.2] | +2.9 % |
+| estall k=1.5 | +27.7 % [+11.7, +41.6] | −3.4 % [−6.0, −0.8] | −3.4 % |
+| estall k=2 | +55.3 % [+25.9, +84.7] | −6.2 % [−10.1, −2.1] | −6.2 % |
+| estlong k=0.5 | −20.8 % [−33.7, −2.8] | +5.3 % [+2.4, +8.1] | +5.9 % |
+| estlong k=2 | +38.5 % [+17.6, +68.9] | −5.6 % [−8.1, −3.2] | −5.6 % |
+| *estall k=3 / k=4 (outside range)* | *+110 % / +164 %* | *−10.3 % / −13.2 %* | — |
+
+- The effect grows with model capability. Under estall k=2, p50 rises 1.16× for GPT-4 0314, 1.30× for Claude 3.7 Sonnet, 1.47× for GPT-5 and 1.55× for Opus 4.6. This tilts the trend, but only by a few percent.
+- The METR-pipeline numbers match the scoping probe: estlong gives Opus 4.6 = 9.49 h / 16.59 h at k = 0.5 / 2, against 9.5 h / 16.6 h in the probe.
+- Effect on threshold-crossing dates [I, back-of-envelope]: a level shift r at a 128.7-day doubling moves the date a fixed threshold is crossed by log2(r) × 128.7 days. For estall, k = 0.5 gives about −56 d (−1.9 months) and k = 2 about +82 d (+2.7 months). For estlong the range is −1.4 to +2.0 months.
+
+## 6. Kill-criteria status
+
+| Criterion | Status | Evidence |
+|---|---|---|
+| **K1** replication within ±10 % on ≥3 models | **PASS** [V] | §2; differences are exactly 0 on 20 models; `replication_summary.json` |
+| **K2** (anchor half only) plausible anchor error k ∈ [0.5, 2] moves frontier p50 ≥15 % or doubling ≥10 % | **p50: yes** (max 55 %). **Doubling: no** (max 6.2 %; max 5.3 % with the 16 h exclusion). The null stop condition needs *both* below threshold, so **K2 does not fire**. It cannot be closed fully until the π grid runs [V numbers; I reading] | §5; `k2_summary.json` |
+| **K3** scooped | **Not fired, partial overlap** [P] | No published split by anchor source found (narrow search, 8 Oct). METR's 22 Jan 2026 limitations note: "adding IID baseline noise had minimal impact" and length-correlated error "wouldn't affect the doubling time much". Barry (20 Mar 2026): p50 correction of 0–60 %. The doubling-time robustness is therefore not new |
+| **K4** disqualified-run encoding differs from my assumption | **Fires (model must be fixed)** [V for code and data; P for METR practice] | §7 |
+
+## 7. K4: how disqualified or illegitimate runs are encoded
+
+1. The public pipeline has no disqualification logic. Grepping `src/` and `reports/` for `disqualif|cheat|reward.?hack|illegitim|exclude_run|manual_review|flagged` returns 0 hits (`k4_check.json`). The score is consumed as delivered:
+   ```python
+   # src/horizon/wrangle/logistic.py (run_logistic_regressions)
+   score_col = wrangle_params.get("score_col", "score_binarized")
+   ...
+   agent_runs[score_col].values,  # type: ignore
+   ```
+   ```python
+   # src/horizon/load_runs.py
+   """...Expects JSONL files in the format output by the filter_runs_for_reports stage
+   (after compute_task_weights has added weight columns)."""
+   ```
+   `filter_runs_for_reports` is an upstream stage that is not in the public repo.
+2. `runs.jsonl` has no flag column. Its columns are `task_id, task_family, run_id, alias, model, score_cont, score_binarized, fatal_error_from, human_minutes, human_score, human_source, task_source, generation_cost, human_cost, time_limit, started_at, completed_at, task_version, tokens_count, cloned, scaffold, equal_task_weight, invsqrt_task_weight`.
+3. `score_binarized` is a deterministic function of `score_cont` within each task: 0 (task, score_cont) pairs carry mixed binary scores. There is therefore no post-hoc override visible on the binary score. `fatal_error_from = usageLimits` covers 997 runs, of which 943 score 0 and 54 score 1.
+4. METR's stated practice is "our standard practice of giving cheats a score of zero" (Frontier Risk Report, 19 May 2026). Its GPT-5.6 Sol post (26 Jun 2026) says "our standard methodology of marking cheating attempts as failures". [P: quotes taken through WebFetch summaries of those pages.]
+5. Is the "16 %" already reflected? The 16 % is "at least 16% of successful runs on Time Horizon 1.1 tasks of 8 hours or longer involved cheating", measured on anonymised **shared models**. Detected cheats are scored 0 at source, so any detected cheat in this file already appears as an ordinary failure and cannot be told apart from one. Whether the public file's runs were reviewed with that pipeline, and which runs were zeroed, is [U].
+
+Consequence for step 3: do **not** flip 16 % of observed successes to failures as if the adjustment were missing. Model π as the residual *undetected* illegitimate share (monitor sensitivity < 1). The "cheats discarded" and "cheats as successes" alternatives cannot be reconstructed from public data.
+
+## 8. What this means for the planned note [I]
+
+- **Continue, with a narrower claim.** The doubling-time angle is weak: under plausible anchor rescaling the doubling time moves less than 10 %, and METR has already said so qualitatively.
+- What is new and solid:
+  1. METR's frontier p50 is **not identified by measured anchors**. Above about 18 h, only estimates locate it.
+  2. Anchor error of ×0.5–×2 moves the frontier **level** by −26 % to +55 %, which is about −2 to +3 months on threshold-crossing dates.
+  3. Estimate-anchored tasks behave as if they were longer than labelled (k* ≈ 3, descriptive).
+- This is a "what the number identifies" note. The emphasis moves from slope to level and threshold-crossing dates.
+- **Next steps:**
+  1. Errors-in-variables / SIMEX with source-specific per-task noise (Barry: estimates within about 4×), because uniform k misses random noise.
+  2. Leave-one-family-out influence (`mlab`, `palisade_crackme`, `prune_attn_heads` and RE-Bench dominate the 480–600 min estimates).
+  3. π grid reframed per K4.
+  4. Pre-register on OSF before running 1–3.
+
+## 9. Honest limits
+
+- Multiplying all estimates by one k is a crude error model. Per-task random error, and error that correlates with task type, are not covered.
+- "Baselined-only" changes the task mix as well as the anchor source, so it is not a clean anchor-error estimate.
+- The data stop at Feb 2026 models. The more extreme frontier (for example Mythos Preview and GPT-5.6 Sol) is not public, and METR's newer pipeline (the 16 h filter) is not public code.
+- The bootstrap is METR's clustered family → task → run scheme. That is "task-level" in the clustered sense, not a plain task resample.
+- No OSF pre-registration was made before step 2, contrary to the design in the scoping doc. Treat this pilot as exploratory. The kill criteria were written beforehand (in the internal scoping document).
+- METR's repo has no LICENSE file, so METR code and data are kept out of git. Only my code and aggregate CSVs are committed.
+- Agent wall-clock was about 1.5 h. Compute is about 4 min. These are not Thomas's hours.
+
+## 10. Sources and commands
+
+- `git clone https://github.com/METR/eval-analysis-public` → `52cb829…`. `curl https://metr.org/assets/benchmark_results_1_1.yaml`.
+- `./run.sh` → `results/log_0*.txt`. METR DVC cross-check: `dvc repro --single-item wrangle_bootstrap_logistic@headline wrangle_logistic_regression@headline`.
+- https://metr.org/time-horizons/ ; https://metr.org/blog/2026-05-19-frontier-risk-report/ ; https://metr.org/blog/2026-06-26-gpt-5-6-sol/ ; https://metr.org/notes/2026-01-22-time-horizon-limitations/ ; https://metr.org/notes/2026-03-20-impact-of-modelling-assumptions-on-time-horizon-results/

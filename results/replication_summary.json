@@ -1,0 +1,42 @@
+{
+  "reference_models": [
+    "GPT-4 0314",
+    "Claude 3.7 Sonnet (Inspect)",
+    "o3 (Inspect)",
+    "Claude Opus 4.6 (Inspect)"
+  ],
+  "max_abs_rel_diff_p50_reference": 0.0,
+  "max_abs_rel_diff_p50_all_models": 0.0,
+  "n_models_compared": 20,
+  "K1_pass": true,
+  "doubling_from_2023": {
+    "published_point_days": 128.744,
+    "published_ci": [
+      104.428,
+      158.012
+    ],
+    "reproduced_point_days": 128.744,
+    "reproduced_ci": [
+      105.26,
+      157.336
+    ],
+    "rel_diff_point": -1.5328809109815822e-06,
+    "sota_agents": [
+      "GPT-4 0314",
+      "GPT-4 1106 (Inspect)",
+      "GPT-4o (Inspect)",
+      "Claude 3.5 Sonnet (Old) (Inspect)",
+      "o1-preview",
+      "Claude 3.5 Sonnet (New) (Inspect)",
+      "o1 (Inspect)",
+      "Claude 3.7 Sonnet (Inspect)",
+      "o3 (Inspect)",
+      "GPT-5 (Inspect)",
+      "Gemini 3 Pro",
+      "Claude Opus 4.5 (Inspect)",
+      "GPT-5.2",
+      "Claude Opus 4.6 (Inspect)"
+    ],
+    "n_bootstrap_valid": 1000
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "sota_all": [
+    "GPT-4 0314",
+    "GPT-4 1106 (Inspect)",
+    "GPT-4o (Inspect)",
+    "Claude 3.5 Sonnet (Old) (Inspect)",
+    "o1-preview",
+    "Claude 3.5 Sonnet (New) (Inspect)",
+    "o1 (Inspect)",
+    "Claude 3.7 Sonnet (Inspect)",
+    "o3 (Inspect)",
+    "GPT-5 (Inspect)",
+    "Gemini 3 Pro",
+    "Claude Opus 4.5 (Inspect)",
+    "GPT-5.2",
+    "Claude Opus 4.6 (Inspect)"
+  ],
+  "sota_baseline_only": [
+    "GPT-4 0314",
+    "GPT-4 1106 (Inspect)",
+    "GPT-4o (Inspect)",
+    "Claude 3.5 Sonnet (Old) (Inspect)",
+    "o1-preview",
+    "o1 (Inspect)",
+    "Claude 3.7 Sonnet (Inspect)",
+    "o3 (Inspect)",
+    "GPT-5 (Inspect)",
+    "GPT-5.1-Codex-Max (Inspect)",
+    "Claude Opus 4.5 (Inspect)",
+    "GPT-5.2",
+    "Claude Opus 4.6 (Inspect)"
+  ]
+}

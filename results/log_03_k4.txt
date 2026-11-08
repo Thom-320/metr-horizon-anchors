@@ -1,0 +1,60 @@
+{
+  "code_hits_for_disqualification_terms": [],
+  "n_task_scorecont_pairs_with_mixed_binarized": 0,
+  "bin1_with_score_cont_below_0.5": 16,
+  "bin0_with_score_cont_ge_0.999": 1,
+  "fatal_error_from_by_score_binarized": {
+    "none": {
+      "0": 6639,
+      "1": 16370
+    },
+    "serverOrTask": {
+      "0": 2,
+      "1": 0
+    },
+    "usageLimits": {
+      "0": 943,
+      "1": 54
+    }
+  },
+  "long_task_successes_by_agent": {
+    "Claude Opus 4.6 (Inspect)": 94,
+    "GPT-5.3-Codex": 82,
+    "GPT-5.1-Codex-Max (Inspect)": 52,
+    "GPT-5.2": 46,
+    "Claude Opus 4.5 (Inspect)": 41,
+    "GPT-5 (Inspect)": 37,
+    "Gemini 3 Pro": 32,
+    "Claude 4 Opus (Inspect)": 22,
+    "o3 (Inspect)": 14,
+    "Claude 4.1 Opus (Inspect)": 12,
+    "Claude 3.5 Sonnet (New) (Inspect)": 8,
+    "o1 (Inspect)": 8,
+    "Claude 3.7 Sonnet (Inspect)": 7,
+    "Claude 3.5 Sonnet (Old) (Inspect)": 4,
+    "o1-preview": 4,
+    "GPT-4o (Inspect)": 3
+  },
+  "long_task_successes_total": 466
+}
+                            agent release_date  implied_k  ci_lo     ci_hi
+                       GPT-4 0314   2023-03-14      6.809  0.865   448.588
+             GPT-4 1106 (Inspect)   2023-11-06      6.119  1.024   694.745
+          Claude 3 Opus (Inspect)   2024-03-04      1.978  0.353    23.769
+            GPT-4 Turbo (Inspect)   2024-04-09      2.563  0.372   121.812
+                 GPT-4o (Inspect)   2024-05-13      1.866  0.497    11.619
+Claude 3.5 Sonnet (Old) (Inspect)   2024-06-20      3.286  0.580    28.208
+                       o1-preview   2024-09-12      2.675  0.802     8.810
+Claude 3.5 Sonnet (New) (Inspect)   2024-10-22      2.462  0.456    13.374
+                     o1 (Inspect)   2024-12-05      2.452  0.588    10.413
+      Claude 3.7 Sonnet (Inspect)   2025-02-24      1.843  0.571     7.903
+                     o3 (Inspect)   2025-04-16      2.185  0.660     9.565
+          Claude 4 Opus (Inspect)   2025-05-22      3.188  0.876    13.932
+        Claude 4.1 Opus (Inspect)   2025-08-05      3.308  0.943    15.698
+                  GPT-5 (Inspect)   2025-08-07      3.236  0.719    37.278
+                     Gemini 3 Pro   2025-11-18      1.568  0.516     8.713
+      GPT-5.1-Codex-Max (Inspect)   2025-11-19      3.483  0.817    26.658
+        Claude Opus 4.5 (Inspect)   2025-11-24      6.081  1.052   146.632
+                          GPT-5.2   2025-12-11      2.931  0.585    68.095
+                    GPT-5.3-Codex   2026-02-05     10.860  1.253  1601.083
+        Claude Opus 4.6 (Inspect)   2026-02-05     12.290  0.969 14540.924

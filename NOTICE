@@ -1,0 +1,43 @@
+metr-horizon-anchors
+Copyright (c) 2026 Thomas Chisica. Original code and text: MIT (see LICENSE).
+
+This repository analyses third-party material it does not own. None of it is
+covered by LICENSE.
+
+1. METR, eval-analysis-public (https://github.com/METR/eval-analysis-public)
+   - Pinned commit 52cb829c7a2efb2d659285c4b1768d191d97f8d2.
+   - The repository has no LICENSE file at that commit, so no rights to
+     redistribute its code or data are granted to us or to you.
+   - Not redistributed here. setup.sh clones it into vendor/ (git-ignored)
+     and checks the sha256 of reports/time-horizon-1-1/data/raw/runs.jsonl.
+   - The analysis imports METR's `horizon` package from that clone; no METR
+     source code is copied into this repository.
+   - requirements.lock.txt lists package versions exported from METR's
+     uv.lock (version metadata only).
+
+2. METR, published Time Horizon 1.1 results
+   (https://metr.org/assets/benchmark_results_1_1.yaml)
+   - Not redistributed. setup.sh downloads it into published/ (git-ignored).
+   - Files in results/ restate METR's published per-model p50/p80 values
+     next to our reproduction of them.
+
+3. Derived outputs in results/ and figures/
+   - Our own computations on METR's public data: model-level statistics,
+     counts, logs and plots.
+   - The per-task extract results/task_anchor_classification.csv (task id,
+     family, source, human minutes, human-time source) is NOT included. It is
+     git-ignored and written locally by scripts/02_anchor.py.
+   - PILOT-MEMO.md and the logs name a few tasks and their human times where
+     the analysis needs them.
+
+4. Quotations
+   - Short attributed quotations, for commentary, from METR publications
+     (sources listed in PILOT-MEMO.md §10), and a few lines of METR code
+     quoted in PILOT-MEMO.md §7 to document how scores are consumed.
+     Copyright in the quoted text and code remains with METR.
+
+5. Python dependencies
+   - Installed at setup time from PyPI under their own licences. None is
+     vendored here.
+
+METR is not affiliated with this project and has not reviewed or endorsed it.

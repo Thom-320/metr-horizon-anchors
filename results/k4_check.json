@@ -1,0 +1,64 @@
+{
+  "columns": [
+    "task_id",
+    "task_family",
+    "run_id",
+    "alias",
+    "model",
+    "score_cont",
+    "score_binarized",
+    "fatal_error_from",
+    "human_minutes",
+    "human_score",
+    "human_source",
+    "task_source",
+    "generation_cost",
+    "human_cost",
+    "time_limit",
+    "started_at",
+    "completed_at",
+    "task_version",
+    "tokens_count",
+    "cloned",
+    "scaffold",
+    "equal_task_weight",
+    "invsqrt_task_weight"
+  ],
+  "code_hits_for_disqualification_terms": [],
+  "n_task_scorecont_pairs_with_mixed_binarized": 0,
+  "bin1_with_score_cont_below_0.5": 16,
+  "bin0_with_score_cont_ge_0.999": 1,
+  "fatal_error_from_by_score_binarized": {
+    "none": {
+      "0": 6639,
+      "1": 16370
+    },
+    "serverOrTask": {
+      "0": 2,
+      "1": 0
+    },
+    "usageLimits": {
+      "0": 943,
+      "1": 54
+    }
+  },
+  "long_task_successes_by_agent": {
+    "Claude Opus 4.6 (Inspect)": 94,
+    "GPT-5.3-Codex": 82,
+    "GPT-5.1-Codex-Max (Inspect)": 52,
+    "GPT-5.2": 46,
+    "Claude Opus 4.5 (Inspect)": 41,
+    "GPT-5 (Inspect)": 37,
+    "Gemini 3 Pro": 32,
+    "Claude 4 Opus (Inspect)": 22,
+    "o3 (Inspect)": 14,
+    "Claude 4.1 Opus (Inspect)": 12,
+    "Claude 3.5 Sonnet (New) (Inspect)": 8,
+    "o1 (Inspect)": 8,
+    "Claude 3.7 Sonnet (Inspect)": 7,
+    "Claude 3.5 Sonnet (Old) (Inspect)": 4,
+    "o1-preview": 4,
+    "GPT-4o (Inspect)": 3
+  },
+  "long_task_successes_total": 466
+}

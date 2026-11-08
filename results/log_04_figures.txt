@@ -1,0 +1,1 @@
+figures: ['fig1_replication_gate.png', 'fig2_anchor_split.png', 'fig3_k_sensitivity.png']

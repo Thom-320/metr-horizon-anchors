@@ -1,0 +1,13 @@
+{
+  "K2_range": [
+    0.5,
+    2.0
+  ],
+  "max_abs_frontier_p50_change_in_range": 0.5534918008522336,
+  "max_abs_doubling_change_in_range_fixed_sota": 0.06158497531867568,
+  "max_abs_doubling_change_in_range_variant_sota": 0.06158497531867568,
+  "p50_threshold": 0.15,
+  "doubling_threshold": 0.1,
+  "p50_criterion_met": true,
+  "doubling_criterion_met": false
+}

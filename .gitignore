@@ -1,0 +1,12 @@
+.venv/
+vendor/
+published/*.yaml
+published/*.html
+scratch/
+results/_*
+results/metr_headline_bootstrap.csv.gz
+results/bootstrap_variants.csv.gz
+__pycache__/
+uv_export.err
+dvc_repro*.log
+results/task_anchor_classification.csv

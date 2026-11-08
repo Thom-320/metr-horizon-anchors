@@ -1,0 +1,202 @@
+human_source   baseline  estimate
+length_bucket                    
+<1m                  67         0
+1-4m                 11         4
+4-16m                29        10
+16-60m               28         6
+1-4h                 12         6
+4-8h                 10        14
+8-16h                 4        22
+>=16h                 1         4
+./src/mhv_common.py:68: RuntimeWarning: overflow encountered in exp2
+  out[f"p{p}"] = float(np.exp2(get_x_for_quantile(model, p / 100)))
+{
+  "K2_range": [
+    0.5,
+    2.0
+  ],
+  "max_abs_frontier_p50_change_in_range": 0.5534918008522336,
+  "max_abs_doubling_change_in_range_fixed_sota": 0.06158497531867568,
+  "max_abs_doubling_change_in_range_variant_sota": 0.06158497531867568,
+  "p50_threshold": 0.15,
+  "doubling_threshold": 0.1,
+  "p50_criterion_met": true,
+  "doubling_criterion_met": false
+}
+      variant                       agent      p50  p50_lo       p50_hi  p50_ratio_vs_all  p50_ratio_lo  p50_ratio_hi     p80  p80_ratio_vs_all
+          all Claude 3.7 Sonnet (Inspect)   60.389  33.386 1.073030e+02             1.000         1.000         1.000  12.092             1.000
+          all   Claude Opus 4.5 (Inspect)  292.995 160.539 6.386200e+02             1.000         1.000         1.000  49.431             1.000
+          all   Claude Opus 4.6 (Inspect)  718.807 319.321 3.949750e+03             1.000         1.000         1.000  69.875             1.000
+          all                  GPT-4 0314    3.987   1.960 7.907000e+00             1.000         1.000         1.000   0.890             1.000
+          all             GPT-5 (Inspect)  203.013 114.211 4.067430e+02             1.000         1.000         1.000  38.312             1.000
+          all                     GPT-5.2  352.249 191.319 8.623390e+02             1.000         1.000         1.000  66.003             1.000
+          all                o3 (Inspect)  119.733  72.983 1.915830e+02             1.000         1.000         1.000  29.982             1.000
+baseline_only Claude 3.7 Sonnet (Inspect)   74.321  33.138 1.700100e+02             1.231         0.765         2.525  12.917             1.068
+baseline_only   Claude Opus 4.5 (Inspect)  704.489 228.656 2.084938e+04             2.404         0.837        64.439 108.091             2.187
+baseline_only   Claude Opus 4.6 (Inspect) 2914.784 394.305 7.688987e+08             4.055         0.585    393623.324 219.720             3.144
+baseline_only                  GPT-4 0314    5.376   2.628 1.019300e+01             1.348         0.950         2.024   1.241             1.395
+baseline_only             GPT-5 (Inspect)  350.539 128.737 2.360212e+03             1.727         0.724         9.366  67.062             1.750
+baseline_only                     GPT-5.2  735.938 218.147 2.890547e+04             2.089         0.637        50.707 117.302             1.777
+baseline_only                o3 (Inspect)  162.597  89.631 3.643590e+02             1.358         0.748         2.718  41.801             1.394
+  estall_k0.5 Claude 3.7 Sonnet (Inspect)   45.909  25.870 8.003100e+01             0.760         0.704         0.819   9.760             0.807
+  estall_k0.5   Claude Opus 4.5 (Inspect)  207.290 113.701 4.680790e+02             0.707         0.623         0.822  32.947             0.667
+  estall_k0.5   Claude Opus 4.6 (Inspect)  530.965 218.312 3.298178e+03             0.739         0.603         1.032  46.673             0.668
+  estall_k0.5                  GPT-4 0314    3.284   1.491 7.277000e+00             0.824         0.688         0.963   0.688             0.773
+  estall_k0.5             GPT-5 (Inspect)  142.296  82.506 2.888770e+02             0.701         0.640         0.791  26.928             0.703
+  estall_k0.5                     GPT-5.2  241.281 133.218 6.237030e+02             0.685         0.601         0.800  44.864             0.680
+  estall_k0.5                o3 (Inspect)   86.061  53.783 1.321120e+02             0.719         0.662         0.784  22.325             0.745
+ estall_k0.75 Claude 3.7 Sonnet (Inspect)   54.012  30.181 9.464200e+01             0.894         0.865         0.924  11.203             0.927
+ estall_k0.75   Claude Opus 4.5 (Inspect)  251.444 140.009 5.462400e+02             0.858         0.817         0.905  42.241             0.855
+ estall_k0.75   Claude Opus 4.6 (Inspect)  621.141 270.220 3.625708e+03             0.864         0.798         0.972  59.403             0.850
+ estall_k0.75                  GPT-4 0314    3.701   1.776 7.634000e+00             0.928         0.864         0.988   0.808             0.908
+ estall_k0.75             GPT-5 (Inspect)  174.373 100.493 3.529840e+02             0.859         0.827         0.899  33.457             0.873
+ estall_k0.75                     GPT-5.2  298.047 164.106 7.249700e+02             0.846         0.802         0.894  56.813             0.861
+ estall_k0.75                o3 (Inspect)  104.477  64.604 1.643930e+02             0.873         0.842         0.904  26.879             0.897
+  estall_k1.5 Claude 3.7 Sonnet (Inspect)   70.403  38.102 1.274090e+02             1.166         1.111         1.226  13.145             1.087
+  estall_k1.5   Claude Opus 4.5 (Inspect)  369.664 198.855 8.130980e+02             1.262         1.183         1.348  60.248             1.219
+  estall_k1.5   Claude Opus 4.6 (Inspect)  918.196 400.270 4.836923e+03             1.277         1.117         1.416  86.789             1.242
+  estall_k1.5                  GPT-4 0314    4.369   2.206 8.394000e+00             1.096         1.010         1.203   0.994             1.117
+  estall_k1.5             GPT-5 (Inspect)  253.395 138.023 5.159640e+02             1.248         1.178         1.322  45.088             1.177
+  estall_k1.5                     GPT-5.2  454.204 241.814 1.101831e+03             1.289         1.202         1.398  79.775             1.209
+  estall_k1.5                o3 (Inspect)  144.851  86.329 2.418960e+02             1.210         1.148         1.274  34.070             1.136
+  estall_k2.0 Claude 3.7 Sonnet (Inspect)   78.350  41.605 1.446570e+02             1.297         1.191         1.417  13.738             1.136
+  estall_k2.0   Claude Opus 4.5 (Inspect)  440.174 230.371 9.888930e+02             1.502         1.341         1.687  68.347             1.383
+  estall_k2.0   Claude Opus 4.6 (Inspect) 1116.661 473.087 5.856350e+03             1.553         1.259         1.847 100.485             1.438
+  estall_k2.0                  GPT-4 0314    4.617   2.398 8.827000e+00             1.158         1.014         1.351   1.056             1.188
+  estall_k2.0             GPT-5 (Inspect)  297.986 157.782 6.349870e+02             1.468         1.330         1.626  49.807             1.300
+  estall_k2.0                     GPT-5.2  550.159 281.549 1.377758e+03             1.562         1.383         1.795  90.092             1.365
+  estall_k2.0                o3 (Inspect)  165.677  97.261 2.854430e+02             1.384         1.266         1.520  36.694             1.224
+  estall_k3.0 Claude 3.7 Sonnet (Inspect)   90.972  47.098 1.772120e+02             1.506         1.308         1.743  14.351             1.187
+  estall_k3.0   Claude Opus 4.5 (Inspect)  569.530 283.356 1.359995e+03             1.944         1.629         2.346  80.370             1.626
+  estall_k3.0   Claude Opus 4.6 (Inspect) 1508.809 618.640 8.221179e+03             2.099         1.556         2.757 122.591             1.754
+  estall_k3.0                  GPT-4 0314    4.925   2.535 9.257000e+00             1.235         1.016         1.551   1.122             1.262
+  estall_k3.0             GPT-5 (Inspect)  377.204 189.716 8.298640e+02             1.858         1.580         2.207  56.466             1.474
+  estall_k3.0                     GPT-5.2  730.839 351.245 1.905730e+03             2.075         1.718         2.636 105.564             1.599
+  estall_k3.0                o3 (Inspect)  200.572 112.312 3.598780e+02             1.675         1.442         1.959  40.122             1.338
+  estall_k4.0 Claude 3.7 Sonnet (Inspect)  101.115  50.914 2.036130e+02             1.674         1.398         2.020  14.627             1.210
+  estall_k4.0   Claude Opus 4.5 (Inspect)  688.879 328.506 1.710820e+03             2.351         1.871         2.990  89.400             1.809
+  estall_k4.0   Claude Opus 4.6 (Inspect) 1895.306 763.279 1.061769e+04             2.637         1.863         3.746 140.587             2.012
+  estall_k4.0                  GPT-4 0314    5.109   2.591 9.425000e+00             1.281         1.016         1.668   1.151             1.294
+  estall_k4.0             GPT-5 (Inspect)  448.034 215.315 1.035871e+03             2.207         1.797         2.757  61.119             1.595
+  estall_k4.0                     GPT-5.2  901.983 416.407 2.536462e+03             2.561         2.012         3.469 117.355             1.778
+  estall_k4.0                o3 (Inspect)  229.993 126.769 4.295620e+02             1.921         1.579         2.358  42.236             1.409
+ estlong_k0.5 Claude 3.7 Sonnet (Inspect)   54.744  30.430 9.468700e+01             0.907         0.857         0.950  11.661             0.964
+ estlong_k0.5   Claude Opus 4.5 (Inspect)  237.667 135.664 5.303310e+02             0.811         0.729         0.899  42.429             0.858
+ estlong_k0.5   Claude Opus 4.6 (Inspect)  569.438 259.746 3.024789e+03             0.792         0.663         0.972  58.200             0.833
+ estlong_k0.5                  GPT-4 0314    3.973   1.962 7.904000e+00             0.996         0.988         1.005   0.905             1.017
+ estlong_k0.5             GPT-5 (Inspect)  166.822  99.120 3.233400e+02             0.822         0.744         0.898  35.247             0.920
+ estlong_k0.5                     GPT-5.2  280.098 161.387 6.697470e+02             0.795         0.703         0.895  56.054             0.849
+ estlong_k0.5                o3 (Inspect)  103.786  65.734 1.574670e+02             0.867         0.808         0.927  28.163             0.939
+estlong_k0.75 Claude 3.7 Sonnet (Inspect)   58.181  32.204 1.031020e+02             0.963         0.942         0.982  11.992             0.992
+estlong_k0.75   Claude Opus 4.5 (Inspect)  267.540 151.018 5.790770e+02             0.913         0.871         0.952  46.962             0.950
+estlong_k0.75   Claude Opus 4.6 (Inspect)  643.435 289.796 3.500435e+03             0.895         0.830         0.967  65.203             0.933
+estlong_k0.75                  GPT-4 0314    3.984   1.961 7.908000e+00             0.999         0.996         1.002   0.896             1.007
+estlong_k0.75             GPT-5 (Inspect)  187.120 108.593 3.708030e+02             0.922         0.880         0.958  37.438             0.977
+estlong_k0.75                     GPT-5.2  318.402 178.887 7.550590e+02             0.904         0.856         0.950  62.416             0.946
+estlong_k0.75                o3 (Inspect)  113.310  70.067 1.758490e+02             0.946         0.918         0.972  29.537             0.985
+ estlong_k1.5 Claude 3.7 Sonnet (Inspect)   63.185  34.686 1.134350e+02             1.046         1.021         1.079  12.088             1.000
+ estlong_k1.5   Claude Opus 4.5 (Inspect)  335.114 177.163 7.449040e+02             1.144         1.078         1.232  51.956             1.051
+ estlong_k1.5   Claude Opus 4.6 (Inspect)  862.370 368.351 4.992244e+03             1.200         1.087         1.345  76.014             1.088
+ estlong_k1.5                  GPT-4 0314    3.989   1.961 7.917000e+00             1.000         0.997         1.004   0.882             0.991
+ estlong_k1.5             GPT-5 (Inspect)  227.611 123.324 4.806710e+02             1.121         1.057         1.208  38.775             1.012
+ estlong_k1.5                     GPT-5.2  410.019 213.320 1.049673e+03             1.164         1.081         1.272  69.737             1.057
+ estlong_k1.5                o3 (Inspect)  128.394  76.287 2.138070e+02             1.072         1.032         1.120  30.078             1.003
+ estlong_k2.0 Claude 3.7 Sonnet (Inspect)   64.967  35.414 1.165550e+02             1.076         1.032         1.135  12.008             0.993
+ estlong_k2.0   Claude Opus 4.5 (Inspect)  369.794 189.929 8.392610e+02             1.262         1.137         1.440  53.185             1.076
+ estlong_k2.0   Claude Opus 4.6 (Inspect)  995.550 410.324 5.655787e+03             1.385         1.176         1.689  80.113             1.147
+ estlong_k2.0                  GPT-4 0314    3.990   1.961 7.917000e+00             1.001         0.994         1.006   0.877             0.986
+ estlong_k2.0             GPT-5 (Inspect)  246.892 129.655 5.488320e+02             1.216         1.095         1.392  38.700             1.010
+ estlong_k2.0                     GPT-5.2  458.995 230.215 1.218462e+03             1.303         1.142         1.536  71.720             1.087
+ estlong_k2.0                o3 (Inspect)  134.330  78.328 2.311860e+02             1.122         1.051         1.212  29.871             0.996
+ estlong_k3.0 Claude 3.7 Sonnet (Inspect)   67.245  36.277 1.218250e+02             1.114         1.045         1.213  11.826             0.978
+ estlong_k3.0   Claude Opus 4.5 (Inspect)  426.550 208.015 1.026055e+03             1.456         1.225         1.818  54.342             1.099
+ estlong_k3.0   Claude Opus 4.6 (Inspect) 1237.726 478.899 7.527748e+03             1.722         1.334         2.371  85.671             1.226
+ estlong_k3.0                  GPT-4 0314    3.989   1.960 7.913000e+00             1.000         0.991         1.008   0.871             0.979
+ estlong_k3.0             GPT-5 (Inspect)  277.167 137.585 6.643890e+02             1.365         1.150         1.715  38.225             0.998
+ estlong_k3.0                     GPT-5.2  541.387 251.375 1.585531e+03             1.537         1.239         2.016  73.792             1.118
+ estlong_k3.0                o3 (Inspect)  142.496  80.918 2.576280e+02             1.190         1.074         1.357  29.316             0.978
+ estlong_k4.0 Claude 3.7 Sonnet (Inspect)   68.714  36.797 1.249150e+02             1.138         1.052         1.268  11.663             0.965
+ estlong_k4.0   Claude Opus 4.5 (Inspect)  473.194 220.460 1.187658e+03             1.615         1.294         2.156  54.868             1.110
+ estlong_k4.0   Claude Opus 4.6 (Inspect) 1457.363 531.265 9.984179e+03             2.027         1.473         3.052  89.568             1.282
+ estlong_k4.0                  GPT-4 0314    3.988   1.959 7.906000e+00             1.000         0.989         1.009   0.868             0.976
+ estlong_k4.0             GPT-5 (Inspect)  301.163 141.091 7.793750e+02             1.483         1.185         1.999  37.714             0.984
+ estlong_k4.0                     GPT-5.2  610.984 268.193 1.948556e+03             1.735         1.315         2.460  74.952             1.136
+ estlong_k4.0                o3 (Inspect)  148.242  83.080 2.766600e+02             1.238         1.088         1.471  28.803             0.961
+      variant                     sota_rule  n_sota  doubling_days   ci_lo   ci_hi  n_valid  ratio_vs_all  ratio_lo  ratio_hi
+          all                  variant_sota      14        128.744 105.260 157.336     1000         1.000     1.000     1.000
+          all                fixed_sota_all      14        128.744 105.260 157.336     1000         1.000     1.000     1.000
+          all fixed_sota_all_excl_p50_gt16h      14        128.744 105.260 157.336     1000         1.000     1.000     1.000
+baseline_only                  variant_sota      13        113.586  59.477 154.690     1000         0.882     0.500     1.151
+baseline_only                fixed_sota_all      14        114.863  59.050 155.881     1000         0.892     0.501     1.155
+baseline_only fixed_sota_all_excl_p50_gt16h      13        124.947  82.215 164.853     1000         0.971     0.674     1.237
+  estall_k0.5                  variant_sota      16        130.716 104.809 164.665     1000         1.015     0.964     1.075
+  estall_k0.5                fixed_sota_all      14        133.865 106.291 168.524     1000         1.040     0.986     1.098
+  estall_k0.5 fixed_sota_all_excl_p50_gt16h      14        133.865 106.291 168.524     1000         1.040     0.986     1.098
+ estall_k0.75                  variant_sota      15        132.482 107.759 163.361     1000         1.029     1.006     1.056
+ estall_k0.75                fixed_sota_all      14        131.332 106.663 162.415     1000         1.020     1.000     1.042
+ estall_k0.75 fixed_sota_all_excl_p50_gt16h      14        131.332 106.663 162.415     1000         1.020     1.000     1.042
+  estall_k1.5                  variant_sota      14        124.324 101.967 150.945     1000         0.966     0.940     0.992
+  estall_k1.5                fixed_sota_all      14        124.324 101.967 150.945     1000         0.966     0.940     0.992
+  estall_k1.5 fixed_sota_all_excl_p50_gt16h      14        124.324 101.967 150.945     1000         0.966     0.940     0.992
+  estall_k2.0                  variant_sota      14        120.815  99.147 146.367     1000         0.938     0.899     0.979
+  estall_k2.0                fixed_sota_all      14        120.815  99.147 146.367     1000         0.938     0.899     0.979
+  estall_k2.0 fixed_sota_all_excl_p50_gt16h      13        125.635 104.153 151.820     1000         0.976     0.919     1.059
+  estall_k3.0                  variant_sota      14        115.546  95.059 139.775     1000         0.897     0.842     0.954
+  estall_k3.0                fixed_sota_all      14        115.546  95.059 139.775     1000         0.897     0.842     0.954
+  estall_k3.0 fixed_sota_all_excl_p50_gt16h      13        120.231  99.637 145.444     1000         0.934     0.862     1.021
+  estall_k4.0                  variant_sota      14        111.688  92.189 135.402     1000         0.868     0.804     0.932
+  estall_k4.0                fixed_sota_all      14        111.688  92.189 135.402     1000         0.868     0.804     0.932
+  estall_k4.0 fixed_sota_all_excl_p50_gt16h      13        116.292  95.841 141.067     1000         0.903     0.828     0.990
+ estlong_k0.5                  variant_sota      13        136.288 110.841 168.521     1000         1.059     1.029     1.088
+ estlong_k0.5                fixed_sota_all      14        135.543 109.806 167.657     1000         1.053     1.024     1.081
+ estlong_k0.5 fixed_sota_all_excl_p50_gt16h      14        135.543 109.806 167.657     1000         1.053     1.024     1.081
+estlong_k0.75                  variant_sota      13        132.406 107.919 162.974     1000         1.028     1.017     1.042
+estlong_k0.75                fixed_sota_all      14        131.674 107.046 161.768     1000         1.023     1.012     1.034
+estlong_k0.75 fixed_sota_all_excl_p50_gt16h      14        131.674 107.046 161.768     1000         1.023     1.012     1.034
+ estlong_k1.5                  variant_sota      14        124.529 101.652 151.720     1000         0.967     0.952     0.982
+ estlong_k1.5                fixed_sota_all      14        124.529 101.652 151.720     1000         0.967     0.952     0.982
+ estlong_k1.5 fixed_sota_all_excl_p50_gt16h      14        124.529 101.652 151.720     1000         0.967     0.952     0.982
+ estlong_k2.0                  variant_sota      14        121.546  99.052 149.488     1000         0.944     0.919     0.968
+ estlong_k2.0                fixed_sota_all      14        121.546  99.052 149.488     1000         0.944     0.919     0.968
+ estlong_k2.0 fixed_sota_all_excl_p50_gt16h      13        127.018 105.678 154.746     1000         0.987     0.945     1.066
+ estlong_k3.0                  variant_sota      15        118.352  96.142 145.991     1000         0.919     0.879     0.960
+ estlong_k3.0                fixed_sota_all      14        117.405  95.032 145.054     1000         0.912     0.874     0.948
+ estlong_k3.0 fixed_sota_all_excl_p50_gt16h      13        123.123 101.353 150.814     1000         0.956     0.907     1.036
+ estlong_k4.0                  variant_sota      15        115.460  93.294 142.349     1000         0.897     0.849     0.947
+ estlong_k4.0                fixed_sota_all      14        114.533  92.362 142.164     1000         0.890     0.844     0.935
+ estlong_k4.0 fixed_sota_all_excl_p50_gt16h      13        120.441  98.378 148.306     1000         0.936     0.879     1.017
+      variant    k  in_K2_range                  frontier  frontier_p50_change frontier_p50_change_ci  doubling_change_fixed_sota doubling_change_fixed_sota_ci  doubling_change_variant_sota  p50_moves_ge15pct  doubling_moves_ge10pct
+  estall_k0.5 0.50         True Claude Opus 4.6 (Inspect)               -0.261       [-0.397, +0.032]                       0.040              [-0.014, +0.098]                         0.015               True                   False
+ estall_k0.75 0.75         True Claude Opus 4.6 (Inspect)               -0.136       [-0.202, -0.028]                       0.020              [-0.000, +0.042]                         0.029              False                   False
+  estall_k1.5 1.50         True Claude Opus 4.6 (Inspect)                0.277       [+0.117, +0.416]                      -0.034              [-0.060, -0.008]                        -0.034               True                   False
+  estall_k2.0 2.00         True Claude Opus 4.6 (Inspect)                0.553       [+0.259, +0.847]                      -0.062              [-0.101, -0.021]                        -0.062               True                   False
+  estall_k3.0 3.00        False Claude Opus 4.6 (Inspect)                1.099       [+0.556, +1.757]                      -0.103              [-0.158, -0.046]                        -0.103               True                    True
+  estall_k4.0 4.00        False Claude Opus 4.6 (Inspect)                1.637       [+0.863, +2.746]                      -0.132              [-0.196, -0.068]                        -0.132               True                    True
+ estlong_k0.5 0.50         True Claude Opus 4.6 (Inspect)               -0.208       [-0.337, -0.028]                       0.053              [+0.024, +0.081]                         0.059               True                   False
+estlong_k0.75 0.75         True Claude Opus 4.6 (Inspect)               -0.105       [-0.170, -0.033]                       0.023              [+0.012, +0.034]                         0.028              False                   False
+ estlong_k1.5 1.50         True Claude Opus 4.6 (Inspect)                0.200       [+0.087, +0.345]                      -0.033              [-0.048, -0.018]                        -0.033               True                   False
+ estlong_k2.0 2.00         True Claude Opus 4.6 (Inspect)                0.385       [+0.176, +0.689]                      -0.056              [-0.081, -0.032]                        -0.056               True                   False
+ estlong_k3.0 3.00        False Claude Opus 4.6 (Inspect)                0.722       [+0.334, +1.371]                      -0.088              [-0.126, -0.052]                        -0.081               True                   False
+ estlong_k4.0 4.00        False Claude Opus 4.6 (Inspect)                1.027       [+0.473, +2.052]                      -0.110              [-0.156, -0.065]                        -0.103               True                    True
+baseline_only  NaN        False Claude Opus 4.6 (Inspect)                3.055  [-0.415, +393622.324]                      -0.108              [-0.499, +0.155]                        -0.118               True                    True
+                            agent  weight_share_estimate  weight_share_ge8h  weight_share_ge8h_estimate  n_runs
+          Claude 3 Opus (Inspect)                  0.368              0.195                       0.161    1038
+Claude 3.5 Sonnet (New) (Inspect)                  0.368              0.193                       0.159    1016
+Claude 3.5 Sonnet (Old) (Inspect)                  0.360              0.181                       0.145    1005
+      Claude 3.7 Sonnet (Inspect)                  0.368              0.195                       0.161    1043
+          Claude 4 Opus (Inspect)                  0.368              0.195                       0.161    1368
+        Claude 4.1 Opus (Inspect)                  0.368              0.195                       0.161    1043
+        Claude Opus 4.5 (Inspect)                  0.368              0.195                       0.161    1044
+        Claude Opus 4.6 (Inspect)                  0.368              0.195                       0.161    1391
+                       GPT-4 0314                  0.353              0.182                       0.145    1401
+             GPT-4 1106 (Inspect)                  0.368              0.195                       0.161    1029
+            GPT-4 Turbo (Inspect)                  0.368              0.195                       0.161    1032
+                 GPT-4o (Inspect)                  0.368              0.195                       0.161    1044
+                  GPT-5 (Inspect)                  0.368              0.195                       0.161    1056
+      GPT-5.1-Codex-Max (Inspect)                  0.368              0.195                       0.161    1369
+                          GPT-5.2                  0.368              0.195                       0.161     961
+                    GPT-5.3-Codex                  0.368              0.195                       0.161    1602
+                     Gemini 3 Pro                  0.368              0.195                       0.161    1044
+                     o1 (Inspect)                  0.368              0.195                       0.161    1044
+                       o1-preview                  0.359              0.174                       0.137    1661
+                     o3 (Inspect)                  0.368              0.195                       0.161    1044
