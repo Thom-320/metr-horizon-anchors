@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Reproduce every number in PILOT-MEMO.md. ~5 min on a 10-core laptop, CPU only, no network after setup.
+# Reproduce every number in PILOT-MEMO.md. about 4–5 min on a 10-core laptop, CPU only, no network after setup.
 set -euo pipefail
 cd "$(dirname "$0")"
 ./setup.sh

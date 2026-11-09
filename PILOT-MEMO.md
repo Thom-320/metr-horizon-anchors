@@ -30,7 +30,7 @@ Labels: [V] verified here by a command or a primary source; [P] partial; [U] unk
 | Environment | Python 3.12.13 (uv venv), scikit-learn 1.8.0, numpy 2.4.1, pandas 2.3.3, dvc 3.66.1. Pins exported from METR's `uv.lock` into `requirements.lock.txt` |
 | Patch | `cairosvg` is stubbed. METR imports it only to draw a logo (`utils/plots.py:396`). libcairo is not on the default macOS dyld path. No numeric code is touched |
 | Cross-check | I also ran METR's own DVC stages (`wrangle_bootstrap_logistic@headline`, `wrangle_logistic_regression@headline`). They gave the same `headline.csv` numbers as `01_replicate.py` |
-| Reproduce | `./run.sh` takes about 4 min. It runs setup, then 4 scripts, and writes `results/`, `figures/` and the logs |
+| Reproduce | `./run.sh` takes about 4–5 min. It runs setup, then 4 scripts, and writes `results/`, `figures/` and the logs |
 
 Exclusions: the public runs file has 20 of the 26 models in the published YAML. It is missing **Claude Mythos Preview**, Gemini 3.1 Pro, GPT-5.4 and three old models that METR stitches in from TH1.0. GPT-5.6 Sol, METR's June 2026 post, is not in either file. In this pilot, "frontier" therefore means **Claude Opus 4.6**, the highest-p50 model in the public runs.
 
@@ -161,7 +161,7 @@ Consequence for step 3: do **not** flip 16 % of observed successes to failures a
 - The bootstrap is METR's clustered family → task → run scheme. That is "task-level" in the clustered sense, not a plain task resample.
 - No OSF pre-registration was made before step 2, contrary to the design in the scoping doc. Treat this pilot as exploratory. The kill criteria were written beforehand (in the internal scoping document).
 - METR's repo has no LICENSE file, so METR code and data are kept out of git. Only my code and aggregate CSVs are committed.
-- Agent wall-clock was about 1.5 h. Compute is about 4 min. These are not Thomas's hours.
+- Agent wall-clock was about 1.5 h. Compute is about 4–5 min. These are not Thomas's hours.
 
 ## 10. Sources and commands
 
