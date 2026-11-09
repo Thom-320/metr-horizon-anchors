@@ -19,7 +19,7 @@ covered by LICENSE.
 
 2. METR, published Time Horizon 1.1 results
    (https://metr.org/assets/benchmark_results_1_1.yaml)
-   - Not redistributed. setup.sh downloads it into published/ (git-ignored).
+   - Not redistributed. setup.sh downloads it into published/ (the YAML and HTML files there are git-ignored).
    - Files in results/ restate METR's published per-model p50/p80 values
      next to our reproduction of them.
 
