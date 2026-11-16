@@ -1,0 +1,14 @@
+{
+  // One-click reproduction: open in Codespaces, wait for setup, then run ./run.sh.
+  "name": "metr-horizon-anchors",
+  // 3.12 matches requirements.lock.txt (exported with --python 3.12).
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+  // setup.sh clones METR's public repo at the pinned commit, checks sha256 and builds .venv with uv.
+  "postCreateCommand": "pip install --user -q uv && ./setup.sh",
+  "customizations": {
+    "codespaces": { "openFiles": ["README.md", "PILOT-MEMO.md"] },
+    "vscode": { "extensions": ["ms-python.python"] }
+  },
+  // run.sh takes ~4–5 min on a 10-core laptop; 4 cores keeps it near 10 min.
+  "hostRequirements": { "cpus": 4, "memory": "16gb" }
+}

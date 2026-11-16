@@ -1,5 +1,7 @@
 # metr-horizon-anchors
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Thom-320/metr-horizon-anchors?quickstart=1)
+
 **How much do METR's AI "time horizons" depend on human task times that were estimated rather than measured?**
 
 METR's Time Horizon 1.1 (TH1.1) summarises each AI model by its *50% time horizon*: the length of task, in human
