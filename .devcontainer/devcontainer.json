@@ -4,6 +4,8 @@
   // 3.12 matches requirements.lock.txt (exported with --python 3.12).
   "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
   // setup.sh clones METR's public repo at the pinned commit, checks sha256 and builds .venv with uv.
+  // sshd lets `gh codespace ssh` reach the container from a terminal.
+  "features": { "ghcr.io/devcontainers/features/sshd:1": {} },
   "postCreateCommand": "pip install --user -q uv && ./setup.sh",
   "customizations": {
     "codespaces": { "openFiles": ["README.md", "PILOT-MEMO.md"] },
