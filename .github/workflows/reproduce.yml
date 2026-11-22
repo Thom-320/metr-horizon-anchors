@@ -1,0 +1,20 @@
+name: Reproduce committed findings
+on: pull_request
+permissions:
+  contents: read
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@1e862dfacbd1d6d858c55d9b792c756523627244 # v7.1.4
+        with:
+          version: '0.13.9'
+      - run: command -v shasum
+      - run: ./setup.sh
+      - run: uv pip install --python .venv/bin/python pytest
+      - run: .venv/bin/python -m pytest -q
+      - run: bash scripts/reproduce_offline.sh
