@@ -1,5 +1,6 @@
 """Audit README Findings against committed summaries, without fitting or fetching data."""
 import csv
+import json
 import math
 from decimal import Decimal
 from pathlib import Path
@@ -32,8 +33,9 @@ def figures(root=ROOT):
         rows.append((label, "not derivable", "NOT DERIVABLE", source))
 
     unknown("METR commit 52cb829", "setup.sh pins it; results/ and published/ contain no provenance record")
-    weights = csv_rows(root, "weight_shares.csv")
-    number("24,008 runs", sum(int(r["n_runs"]) for r in weights), "24008", "results/weight_shares.csv: sum(n_runs)")
+    k4 = json.loads((root / "results" / "k4_check.json").read_text())
+    n_runs = sum(int(n) for group in k4["fatal_error_from_by_score_binarized"].values() for n in group.values())
+    number("24,008 runs", n_runs, "24008", "results/k4_check.json: sum(fatal_error_from_by_score_binarized), including human runs")
     counts = csv_rows(root, "anchor_counts_by_length.csv")
     measured = sum(int(r["baseline"]) for r in counts)
     estimated = sum(int(r["estimate"]) for r in counts)
